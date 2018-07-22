@@ -1,77 +1,82 @@
-const express = require('express');
-
+const express = require("express");
 const router = express.Router();
-
-
-router.get('/customers', function(req, res) {
-  // TODO: fix code here
-  res.status(200).json({
-    customers: [{
-      id: 2,
-      title: 'Mr',
-      firstname: 'Laurie',
-      surname: 'Ainley',
-      email: 'laurie@ainley.com'
-    }
-  ]});
+const filename = "./database/database.sqlite";
+const knex = require("knex")({
+  client: "sqlite3",
+  connection: {
+    filename
+  }
+});
+router.get("/customers", function(req, res) {
+  const sqlStatement = "select * from customers";
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.status(200);
 });
 
-
-router.get('/customers/:id', function(req, res) {
-  // TODO: add code here
+router.get("/customers/:id", function(req, res) {
+  const sqlStatement = `select * from customers where id=${req.params.id}`;
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
 });
 
-
-router.get('/customers/:surname', function(req, res) {
-  // TODO: add code here
+router.get("/customers/:surname", function(req, res) {
+  const sqlStatement = `select * from customers where surname=${
+    req.params.surname
+  }`;
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
 });
 
-
-router.post('/customers/', function(req, res) {
-  // EXPECTED JSON Object:
-  // {
-  //   title: 'Mr',
-  //   firstname: 'Laurie',
-  //   surname: 'Ainley',
-  //   email: 'laurie@ainley.com'
-  // }
-
-  // TODO: add code here
+router.delete("/customers/:id", function(req, res) {
+  const sqlStatement = `delete * from customers where id=${req.params.id}`;
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
 });
 
+router.post("/customers/", function(req, res) {
+  const body = req.body;
 
-router.put('/customers/:id', function(req, res) {
-  // EXPECTED JSON Object:
-  // {
-  //   title: 'Mr',
-  //   firstname: 'Laurie',
-  //   surname: 'Ainley',
-  //   email: 'laurie@ainley.com'
-  // }
-
-  // TODO: add code here
+  const sqlStatement = `INSERT INTO customers (title, firstname, surname, email) VALUES ("${
+    body.title
+  }", "${body.firstname}", "${body.surname}","${body.email}")`;
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.send("Success");
 });
 
+router.put("/customers/:id", function(req, res) {
+  const body = req.body;
+  const customerId = req.params.id;
+  const sqlStatement = `UPDATE customers 
+  SET title =" ${body.title}",
+   firstname ="${body.firstname}"
+  WHERE id =${customerId}`;
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.send("Success");
+});
 
 // get '/reservations'
 // TODO: add code here
 
-
 // get '/reservations/:id'
 // TODO: add code here
-
 
 // delete '/reservations/:id'
 // TODO: add code here
 
-
 // get '/reservations/starting-on/:startDate'
 // TODO: add code here
 
-
 // get '/reservations/active-on/:date'
 // TODO: add code here
-
 
 // post '/reservations'
 // EXPECTED JSON Object:
@@ -84,10 +89,8 @@ router.put('/customers/:id', function(req, res) {
 // }
 // TODO: add code here
 
-
 // get `/detailed-invoices'
 // TODO: add code here
-
 
 // get `/reservations/details-between/:from_day/:to_day`
 // TODO: add code here

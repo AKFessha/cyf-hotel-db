@@ -3,6 +3,7 @@ const SERVER_PORT = process.env.PORT || 8080;
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyparser = require("body-parser");
+const cors = require("cors");
 
 const apiRouter = require("./api");
 
@@ -20,6 +21,7 @@ app.set("view engine", "hbs");
 
 app.use(express.static("public"));
 app.use(express.static("assets"));
+app.use(cors());
 
 // handle HTTP POST requests
 app.use(bodyparser.json());

@@ -32,6 +32,37 @@ router.get("/customers/:surname", function(req, res) {
     res.json(data);
   });
 });
+router.delete("/customers/:id", function(req, res) {
+  const sqlStatement = `delete * from customers where id=${req.params.id}`;
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+});
+// post
+router.post("/customers/", function(req, res) {
+  const body = req.body;
+
+  const sqlStatement = `INSERT INTO customers (title, firstname, surname, email) VALUES ("${
+    body.title
+  }", "${body.firstname}", "${body.surname}","${body.email}")`;
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.send("Success");
+});
+//update
+router.put("/customers/:id", function(req, res) {
+  const body = req.body;
+  const customerId = req.params.id;
+  const sqlStatement = `UPDATE customers 
+  SET title =" ${body.title}",
+   firstname ="${body.firstname}"
+  WHERE id =${customerId}`;
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.send("Success");
+});
 
 // get '/reservations'
 // TODO: add code here

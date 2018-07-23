@@ -17,7 +17,7 @@ router.get("/customers", function(req, res) {
   res.status(200);
 });
 //Filtering by id and surname
-outer.get("/customers/:id", function(req, res) {
+router.get("/customers/:id", function(req, res) {
   const sqlStatement = `select * from customers where id=${req.params.id}`;
   knex.raw(sqlStatement).then(function(data) {
     res.json(data);
@@ -32,11 +32,13 @@ router.get("/customers/:surname", function(req, res) {
     res.json(data);
   });
 });
+//delete
 router.delete("/customers/:id", function(req, res) {
-  const sqlStatement = `delete * from customers where id=${req.params.id}`;
+  const sqlStatement = `delete from customers where id=${req.params.id}`;
   knex.raw(sqlStatement).then(function(data) {
     res.json(data);
   });
+  res.send("succesfully deleted");
 });
 // post
 router.post("/customers/", function(req, res) {

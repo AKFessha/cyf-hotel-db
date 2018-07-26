@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS reservations;
 PRAGMA foreign_keys = ON;
 CREATE TABLE reservations (
-    id VARCHAR  INTEGER PRIMARY KEY AUTOINCREMENT,
-    customer_id INTEGER,
+    id  INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id  INTEGER,
     room_id INTEGER,
     check_in_date VARCHAR,
     check_out_date VARCHAR,

@@ -14,6 +14,8 @@ CREATE TABLE customers (
     email     VARCHAR (255) 
 );
 
+
+
 DROP TABLE IF EXISTS invoices;
 
 CREATE TABLE invoices (
@@ -39,7 +41,8 @@ DROP TABLE IF EXISTS rooms;
 CREATE TABLE rooms (
     id        INTEGER       PRIMARY KEY AUTOINCREMENT,
     room_type_id INTEGER,
-    sea_view     BOOLEAN
+    sea_view     BOOLEAN,
+    FOREIGN KEY(room_type_id) REFERENCES room_types(id)
 );
 
 INSERT INTO customers (title, firstname, surname, email) VALUES ('Mr.', 'Laurie', 'Ainley', 'laurie@ainley.com');

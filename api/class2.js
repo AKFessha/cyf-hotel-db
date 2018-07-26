@@ -25,9 +25,9 @@ router.get("/customers/:id", function(req, res) {
 });
 
 router.get("/customers/:surname", function(req, res) {
-  const sqlStatement = `select * from customers where surname=${
+  const sqlStatement = `select * from customers where surname ilike "%${
     req.params.surname
-  }`;
+  }%"`;
   knex.raw(sqlStatement).then(function(data) {
     res.json(data);
   });
@@ -67,30 +67,6 @@ router.put("/customers/:id", function(req, res) {
 });
 
 // get '/reservations'
-// TODO: add code here
-
-// get '/reservations/:id'
-// TODO: add code here
-
-// delete '/reservations/:id'
-// TODO: add code here
-
-// get '/reservations/starting-on/:startDate'
-// TODO: add code here
-
-// get '/reservations/active-on/:date'
-// TODO: add code here
-
-// post '/reservations'
-// EXPECTED JSON Object:
-// {
-//   customer_id: 1,
-//   room_id: 1,
-//   check_in_date: '2018-01-20',
-//   check_out_date: '2018-01-22',
-//   room_price: 129.90
-// }
-// TODO: add code here
 
 // get `/detailed-invoices'
 // TODO: add code here

@@ -68,6 +68,57 @@ router.put("/customers/:id", function(req, res) {
 
 // get '/reservations'
 
+router.get("/reservations", (req, res) => {
+  const sqlStatement = "select * from reservations";
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.send("Success");
+});
+
+// get '/reservations/:id'
+router.get("/reservations/:id", (req, res) => {
+  const sqlStatement = `select *from reservations where id = ${req.params.id}`;
+  knex.raw(sqlStatement).then(data => {
+    res.json(data);
+  });
+});
+
+// delete '/reservations/:id'
+router.delete("/reservations/:id", (req, res) => {
+  const sqlStatement = `delete  from reservations where id =${req.params.id} `;
+  knex.raw(sqlStatement).then(data => {
+    res.json(data);
+  });
+});
+
+// get '/reservations/starting-on/:startDate'
+router.get("/reservations/starting-on/:startDate");
+const sqlStatement = `selct`;
+// get '/reservations/active-on/:date'
+// TODO: add code here
+
+// post '/reservations'
+router.post("/reservations", (req, res) => {
+  const body = req.body;
+  const sqlStatement = `insert into reservations(customer_id, room_id, check_in_date, check_out_date, room_price) values ("${
+    body.customer_id
+  }", "${body.room_id}", "${body.check_in_date}", "${body.check_out_date}", "${
+    body.room_price
+  }")`;
+  knex.raw(sqlStatement).then(data => {
+    res.json(data);
+  });
+  res.send("succesfully posted");
+});
+// {
+//   customer_id: 1,
+//   room_id: 1,
+//   check_in_date: '2018-01-20',
+//   check_out_date: '2018-01-22',
+//   room_price: 129.90
+// }
+
 // get `/detailed-invoices'
 // TODO: add code here
 

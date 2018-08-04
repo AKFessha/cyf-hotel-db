@@ -16,6 +16,23 @@ router.get("/customers", function(req, res) {
   });
   res.status(200);
 });
+
+//Get rooms
+router.get("/rooms", function(req, res) {
+  const sqlStatement = "select * from rooms";
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.status(200);
+});
+//Get room_types
+router.get("/room_types", function(req, res) {
+  const sqlStatement = "select * from room_types";
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.status(200);
+});
 //Filtering by id and surname
 router.get("/customers/:id", function(req, res) {
   const sqlStatement = `select * from customers where id=${req.params.id}`;

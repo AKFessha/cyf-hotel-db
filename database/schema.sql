@@ -36,6 +36,7 @@ CREATE TABLE room_types (
     current_price  INT
 );
 
+
 DROP TABLE IF EXISTS rooms;
 
 CREATE TABLE rooms (
@@ -48,3 +49,9 @@ CREATE TABLE rooms (
 INSERT INTO customers (title, firstname, surname, email) VALUES ('Mr.', 'Laurie', 'Ainley', 'laurie@ainley.com');
 INSERT INTO customers (title, firstname, surname, email) VALUES ('Mr.', 'Donald', 'Trump', 'don@twitter.com');
 INSERT INTO customers (title, firstname, surname, email) VALUES ('Ms.', 'Beyonce', 'Knowles', 'beyonce@queen.gov');
+INSERT INTO room_types(type_name, original_price, current_price) VALUES ("standard", 100, 200);
+INSERT INTO room_types(type_name, original_price, current_price) VALUES ("single", 150, 250);
+INSERT INTO room_types(type_name, original_price, current_price) VALUES ("double", 200, 300);
+INSERT INTO rooms(room_type_id, sea_view) VALUES (1, 0);
+INSERT INTO rooms(room_type_id, sea_view) VALUES (2,1);
+INSERT INTO rooms(room_type_id, sea_view) VALUES (3,0);

@@ -93,6 +93,15 @@ router.get("/reservations", (req, res) => {
   res.status(200);
 });
 
+// get '/reviews'
+
+router.get("/reviews", (req, res) => {
+  const sqlStatement = "select * from reviews";
+  knex.raw(sqlStatement).then(function(data) {
+    res.json(data);
+  });
+  res.status(200);
+});
 // get '/reservations/:id'
 router.get("/reservations/:id", (req, res) => {
   const sqlStatement = `select *from reservations where id = ${req.params.id}`;

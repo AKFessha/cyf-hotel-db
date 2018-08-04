@@ -55,7 +55,7 @@ router.delete("/customers/:id", function(req, res) {
   knex.raw(sqlStatement).then(function(data) {
     res.json(data);
   });
-  res.send("succesfully deleted");
+  res.status(200);
 });
 // post
 router.post("/customers/", function(req, res) {
@@ -67,7 +67,7 @@ router.post("/customers/", function(req, res) {
   knex.raw(sqlStatement).then(function(data) {
     res.json(data);
   });
-  res.send("Success");
+  res.status(200);
 });
 //update
 router.put("/customers/:id", function(req, res) {
@@ -80,7 +80,7 @@ router.put("/customers/:id", function(req, res) {
   knex.raw(sqlStatement).then(function(data) {
     res.json(data);
   });
-  res.send("Success");
+  res.status(200);
 });
 
 // get '/reservations'
@@ -90,7 +90,7 @@ router.get("/reservations", (req, res) => {
   knex.raw(sqlStatement).then(function(data) {
     res.json(data);
   });
-  res.send("Success");
+  res.status(200);
 });
 
 // get '/reservations/:id'
@@ -126,7 +126,7 @@ router.post("/reservations", (req, res) => {
   knex.raw(sqlStatement).then(data => {
     res.json(data);
   });
-  res.send("succesfully posted");
+  res.status(200);
 });
 // {
 //   customer_id: 1,

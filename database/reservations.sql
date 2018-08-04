@@ -12,6 +12,6 @@ CREATE TABLE reservations (
     FOREIGN KEY (customer_id)  REFERENCES customers(id),
     FOREIGN KEY (room_id)  REFERENCES rooms(id)
  );
- INSERT INTO reservations(customer_id, room_id, check_in_date, check_out_date, room_price) VALUES (2, 1, "21/06/18", "29/06/18", 100);
- INSERT INTO reservations(customer_id, room_id, check_in_date, check_out_date, room_price) VALUES (3, 2, "12/06/18", "18/06/18", 120);
- INSERT INTO reservations(customer_id, room_id, check_in_date, check_out_date, room_price) VALUES (1, 3, "01/06/18", "09/06/18", 130);
+ INSERT INTO reservations(customer_id, room_id, check_in_date, check_out_date, room_price) VALUES (2, 3, "21/06/18", "29/06/18", 100);
+ INSERT INTO reservations(customer_id, room_id, check_in_date, check_out_date, room_price) VALUES (1, 2, "12/06/18", "18/06/18", 120);
+ INSERT INTO reservations(customer_id, room_id, check_in_date, check_out_date, room_price) VALUES (3, 1, "01/06/18", "09/06/18", 130);

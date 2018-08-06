@@ -158,12 +158,23 @@ router.get("/reviews/:id", (req, res) => {
   });
   res.status(200);
 });
+
+//Post review
 router.post("/reviews", (req, res) => {
   const sqlStatement = `INSERT INTO reviews(customer_id, room_type_id, rating, comment, review_date) VALUES(${
     body.customer_id
   }, ${body.room_type_id}, ${body.rating}, ${body.comment}, ${
     body.review_date
   })`;
+  knex.raw(sqlStatement).then(data => {
+    res.json(data);
+  });
+  res.status(200);
+});
+
+//Delete review
+router.get("/reviews/:id", (req, res) => {
+  const sqlStatement = `delete from customers where id =${req.params.id}`;
   knex.raw(sqlStatement).then(data => {
     res.json(data);
   });

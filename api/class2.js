@@ -95,7 +95,7 @@ router.get("/reservations", (req, res) => {
 
 // get '/reservations/:id'
 router.get("/reservations/:id", (req, res) => {
-  const sqlStatement = `select *from reservations where id = ${req.params.id}`;
+  const sqlStatement = `select * from reservations where id = ${req.params.id}`;
   knex.raw(sqlStatement).then(data => {
     res.json(data);
   });
@@ -161,6 +161,7 @@ router.get("/reviews/:id", (req, res) => {
 
 //Post review
 router.post("/reviews", (req, res) => {
+  const body = req.body;
   const sqlStatement = `INSERT INTO reviews(customer_id, room_type_id, rating, comment, review_date) VALUES(${
     body.customer_id
   }, ${body.room_type_id}, ${body.rating}, ${body.comment}, ${
@@ -181,4 +182,17 @@ router.get("/reviews/:id", (req, res) => {
   res.status(200);
 });
 
+//Update review
+router.put("/reviews/:id", (req, res) => {
+  const body = req.body;
+  const reviewId = req.params.id;
+  const sqlStatement = `update reviews set rating =${body.rating}, comment=${
+    body.comment
+  } where id = ${reviewId}
+ `;
+  knex.raw(sqlStatement).then(data => {
+    res.json(data);
+  });
+  res.status(200);
+});
 module.exports = router;

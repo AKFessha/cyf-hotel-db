@@ -128,6 +128,19 @@ router.post("/reservations", (req, res) => {
   });
   res.status(200);
 });
+
+//update reservations
+router.put("reservations/:id", (req, res) => {
+  const body = req.body;
+  const reservationId = req.params.id;
+  const sqlStatement = `update reservations set room_price = ${
+    body.room_price
+  }, check_out_date= ${body.check_out_date} where id = ${reservationId}`;
+  knex.raw(sqlStatement).then(data => {
+    res.json(data);
+  });
+  res.status(200);
+});
 // {
 //   customer_id: 1,
 //   room_id: 1,
